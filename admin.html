@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - PostMaker Pro</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="spinner"></div>
+      <p>Processando...</p>
+    </div>
+
+    <div class="container">
+      <header>
+        <h1>⚙️ Administração de Templates</h1>
+        <a href="index.html" class="btn-back">← Voltar</a>
+      </header>
+
+      <main>
+        <section class="upload-section">
+          <h2>1. Fazer Upload de Template</h2>
+          <div class="upload-area">
+            <input
+              type="file"
+              id="imageInput"
+              accept="image/*"
+              class="file-input"
+            />
+            <label for="imageInput" class="upload-label">
+              <span class="upload-icon">📁</span>
+              <span>Clique ou arraste uma imagem aqui</span>
+              <span class="upload-hint">JPG, PNG até 10MB</span>
+            </label>
+          </div>
+        </section>
+
+        <section
+          class="config-section"
+          id="configSection"
+          style="display: none"
+        >
+          <h2>2. Configurar Coordenadas</h2>
+          <p class="instruction">
+            <strong>📝 Vermelho = NOME</strong> |
+            <strong>📞 Azul = TELEFONE</strong><br />
+            Arraste as caixas para posicionar. Redimensione pelo canto inferior
+            direito.
+          </p>
+
+          <div
+            class="canvas-container"
+            id="canvasWrapper"
+            style="position: relative"
+          >
+            <canvas id="canvas"></canvas>
+          </div>
+
+          <div class="coordinates-info">
+            <div class="coord-item">
+              <h3>📝 Nome</h3>
+              <div class="text-config">
+                <label>
+                  Tamanho:
+                  <input
+                    type="number"
+                    id="nameFontSize"
+                    value="40"
+                    min="10"
+                    max="200"
+                  />px
+                </label>
+                <label>
+                  Cor:
+                  <input type="color" id="nameColor" value="#000000" />
+                </label>
+                <label>
+                  Fonte:
+                  <select id="nameFont">
+                    <option value="Arial">Arial</option>
+                    <option value="Helvetica">Helvetica</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Impact" selected>Impact</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <div class="coord-item">
+              <h3>📞 Telefone</h3>
+              <div class="text-config">
+                <label>
+                  Tamanho:
+                  <input
+                    type="number"
+                    id="phoneFontSize"
+                    value="30"
+                    min="10"
+                    max="200"
+                  />px
+                </label>
+                <label>
+                  Cor:
+                  <input type="color" id="phoneColor" value="#000000" />
+                </label>
+                <label>
+                  Fonte:
+                  <select id="phoneFont">
+                    <option value="Arial">Arial</option>
+                    <option value="Helvetica">Helvetica</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Impact" selected>Impact</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="save-section">
+            <div class="form-row">
+              <label class="form-field">
+                Nome do Template:
+                <input
+                  type="text"
+                  id="templateName"
+                  placeholder="Ex: Post Azul, Template Verão..."
+                />
+              </label>
+
+              <label class="form-field">
+                Categoria:
+                <select id="templateCategory" class="category-select">
+                  <option value="">Selecione a categoria</option>
+                  <option value="royal-pago">🟣 Royal Pago</option>
+                  <option value="capital-plus">🟢 Capital Plus</option>
+                </select>
+              </label>
+            </div>
+
+            <button id="saveTemplate" class="btn btn-primary btn-large">
+              💾 Salvar Template
+            </button>
+          </div>
+        </section>
+
+        <section class="templates-list">
+          <div class="section-header">
+            <h2>Templates Salvos</h2>
+            <div class="filters">
+              <button class="filter-btn active" data-category="">Todos</button>
+              <button class="filter-btn" data-category="royal-pago">
+                🟣 Royal Pago
+              </button>
+              <button class="filter-btn" data-category="capital-plus">
+                🟢 Capital Plus
+              </button>
+            </div>
+          </div>
+          <div id="templatesList" class="templates-grid">
+            <p class="empty-message">Carregando templates...</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+
+    <script src="firebase-config.js"></script>
+    <script src="database.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>

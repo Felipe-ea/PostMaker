@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerar Post - PostMaker Pro</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="spinner"></div>
+      <p>Processando...</p>
+    </div>
+
+    <div class="container">
+      <header>
+        <h1>👤 Gerar Meu Post Personalizado</h1>
+        <a href="index.html" class="btn-back">← Voltar</a>
+      </header>
+
+      <main>
+        <section class="user-form">
+          <div class="section-header">
+            <h2>1. Escolha seu Template</h2>
+            <div class="filters">
+              <button class="filter-btn active" data-category="">Todos</button>
+              <button class="filter-btn" data-category="royal-pago">🟣 Royal Pago</button>
+              <button class="filter-btn" data-category="capital-plus">🟢 Capital Plus</button>
+            </div>
+          </div>
+          
+          <div id="templatesGrid" class="templates-selection">
+            <p class="empty-message">Carregando templates...</p>
+          </div>
+
+          <div id="personalizeSection" style="display: none">
+            <h2>2. Personalize seu Post</h2>
+
+            <div class="preview-live" id="previewLive" style="display: none">
+              <h3>👁️ Preview em Tempo Real</h3>
+              <div class="preview-container">
+                <canvas id="previewCanvas"></canvas>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="userName">
+                📝 Seu Nome:
+                <input
+                  type="text"
+                  id="userName"
+                  placeholder="Digite seu nome completo"
+                />
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label for="userPhone">
+                📞 Seu Telefone:
+                <input
+                  type="text"
+                  id="userPhone"
+                  placeholder="(11) 99999-9999"
+                />
+              </label>
+            </div>
+
+            <button id="generateBtn" class="btn btn-primary btn-large">
+              ✨ Gerar Meu Post
+            </button>
+          </div>
+        </section>
+
+        <section id="resultSection" style="display: none">
+          <h2>3. Seu Post Personalizado</h2>
+          <div class="result-container">
+            <canvas id="resultCanvas"></canvas>
+          </div>
+          <div class="result-actions">
+            <button id="downloadBtn" class="btn btn-success">
+              ⬇️ Baixar Post
+            </button>
+            <button id="newPostBtn" class="btn btn-secondary">
+              🔄 Fazer Outro Post
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    
+    <script src="firebase-config.js"></script>
+    <script src="database.js"></script>
+    <script src="user.js"></script>
+  </body>
+</html>
+
+          <div id="personalizeSection" style="display: none">
+            <h2>2. Personalize seu Post</h2>
+
+            <div class="preview-live" id="previewLive" style="display: none">
+              <h3>👁️ Preview em Tempo Real</h3>
+              <div class="preview-container">
+                <canvas id="previewCanvas"></canvas>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="userName">
+                📝 Seu Nome:
+                <input
+                  type="text"
+                  id="userName"
+                  placeholder="Digite seu nome completo"
+                />
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label for="userPhone">
+                📞 Seu Telefone:
+                <input
+                  type="text"
+                  id="userPhone"
+                  placeholder="(11) 99999-9999"
+                />
+              </label>
+            </div>
+
+            <button id="generateBtn" class="btn btn-primary">
+              ✨ Gerar Meu Post
+            </button>
+          </div>
+        </section>
+
+        <section id="resultSection" style="display: none">
+          <h2>3. Seu Post Personalizado</h2>
+          <div class="result-container">
+            <canvas id="resultCanvas"></canvas>
+          </div>
+          <div class="result-actions">
+            <button id="downloadBtn" class="btn btn-success">
+              ⬇️ Baixar Post
+            </button>
+            <button id="newPostBtn" class="btn btn-secondary">
+              🔄 Fazer Outro Post
+            </button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="user.js"></script>
+  </body>
+</html>

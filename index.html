@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PostMaker Pro - Gerador de Posts Personalizados</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="hero-bg"></div>
+
+    <div class="container home-container">
+      <header class="home-header">
+        <div class="logo">
+          <span class="logo-icon">🎨</span>
+          <h1>PostMaker <span class="pro-badge">PRO</span></h1>
+        </div>
+        <p class="subtitle">
+          Crie posts profissionais personalizados em segundos
+        </p>
+        <div class="features-badges">
+          <span class="badge">☁️ Cloud</span>
+          <span class="badge">📱 Mobile</span>
+          <span class="badge">⚡ Rápido</span>
+        </div>
+      </header>
+
+      <main class="home-cards">
+        <div class="card card-admin">
+          <div class="card-header">
+            <div class="card-icon">⚙️</div>
+            <h2>Administração</h2>
+          </div>
+          <p>
+            Configure templates de posts por categoria e defina posições de nome
+            e telefone
+          </p>
+          <ul class="card-features">
+            <li>✓ Upload de imagens</li>
+            <li>✓ Drag & Drop</li>
+            <li>✓ Categorias</li>
+          </ul>
+          <a href="admin.html" class="btn btn-admin">Acessar Admin</a>
+        </div>
+
+        <div class="card card-user">
+          <div class="card-header">
+            <div class="card-icon">👤</div>
+            <h2>Gerar Post</h2>
+          </div>
+          <p>
+            Escolha um template, personalize com seu nome e telefone e baixe
+            instantaneamente
+          </p>
+          <ul class="card-features">
+            <li>✓ Preview ao vivo</li>
+            <li>✓ Filtro por categoria</li>
+            <li>✓ Download HD</li>
+          </ul>
+          <a href="user.html" class="btn btn-user">Criar Meu Post</a>
+        </div>
+      </main>
+
+      <footer class="home-footer">
+        <p>
+          © 2026 PostMaker Pro | <span class="status-indicator">●</span>
+          <span id="connectionStatus">Conectando...</span>
+        </p>
+      </footer>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+
+    <!-- Scripts -->
+    <script src="firebase-config.js"></script>
+    <script src="database.js"></script>
+    <script>
+      // Verificar status da conexão
+      window.addEventListener("load", () => {
+        const statusEl = document.getElementById("connectionStatus");
+        const indicator = document.querySelector(".status-indicator");
+
+        if (useFirebase) {
+          statusEl.textContent = "Online | Firebase";
+          indicator.style.color = "#10b981";
+        } else {
+          statusEl.textContent = "Offline | Local";
+          indicator.style.color = "#f59e0b";
+        }
+      });
+    </script>
+  </body>
+</html>
