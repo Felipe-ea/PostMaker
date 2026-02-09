@@ -37,7 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .querySelectorAll(".filter-btn")
         .forEach((b) => b.classList.remove("active"));
       e.target.classList.add("active");
-      currentFilter = e.target.dataset.category;
+      currentFilter = e.target.dataset.category || "";
+      console.log("🔍 Filtro selecionado:", currentFilter || "Todos");
       loadAvailableTemplates(currentFilter);
     });
   });
@@ -45,10 +46,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Carregar templates disponíveis
 async function loadAvailableTemplates(category = null) {
+  console.log("🔄 loadAvailableTemplates chamado com categoria:", category);
+
   const container = document.getElementById("templatesGrid");
   container.innerHTML = '<p class="empty-message">Carregando...</p>';
 
   const templates = await Database.getTemplates(category);
+  console.log("📦 Templates recebidos:", templates.length);
 
   if (templates.length === 0) {
     const categoryName =
@@ -68,8 +72,8 @@ async function loadAvailableTemplates(category = null) {
     .map((template) => {
       const categoryBadge =
         template.category === "royal-pago"
-          ? '<span class="category-badge royal">🟣 Royal Pago</span>'
-          : '<span class="category-badge capital">🟢 Capital Plus</span>';
+          ? '<span class="category-badge royal">🟡 Royal Pago</span>'
+          : '<span class="category-badge capital">🔵 Capital Plus</span>';
 
       return `
         <div class="template-option ${

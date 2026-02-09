@@ -86,12 +86,18 @@ const Database = {
 
   // Obter todos os templates
   async getTemplates(category = null) {
+    console.log("🔍 Database.getTemplates chamado com categoria:", category);
+
     if (useFirebase && db) {
       try {
-        let query = db.collection("templates").orderBy("createdAt", "desc");
+        let query = db.collection("templates");
 
-        if (category) {
+        // Se tiver filtro de categoria, aplicar WHERE primeiro
+        if (category && category !== "") {
+          console.log("✅ Aplicando filtro WHERE para categoria:", category);
           query = query.where("category", "==", category);
+        } else {
+          console.log("📋 Buscando TODOS os templates (sem filtro)");
         }
 
         const snapshot = await query.get();
@@ -101,6 +107,21 @@ const Database = {
           templates.push({ id: doc.id, ...doc.data() });
         });
 
+        // Ordenar no cliente por createdAt (evita necessidade de índice composto)
+        templates.sort((a, b) => {
+          const dateA = a.createdAt?.toDate
+            ? a.createdAt.toDate()
+            : new Date(a.createdAt);
+          const dateB = b.createdAt?.toDate
+            ? b.createdAt.toDate()
+            : new Date(b.createdAt);
+          return dateB - dateA; // Mais recente primeiro
+        });
+
+        console.log(
+          `✅ ${templates.length} templates encontrados:`,
+          templates.map((t) => `${t.name} (${t.category})`)
+        );
         return templates;
       } catch (error) {
         console.error("Erro ao buscar templates do Firebase:", error);
@@ -116,7 +137,8 @@ const Database = {
     const data = localStorage.getItem("postmaker_templates");
     let templates = data ? JSON.parse(data) : [];
 
-    if (category) {
+    // Filtrar apenas se categoria não for nula nem string vazia
+    if (category && category !== "") {
       templates = templates.filter((t) => t.category === category);
     }
 

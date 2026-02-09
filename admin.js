@@ -41,7 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .querySelectorAll(".filter-btn")
         .forEach((b) => b.classList.remove("active"));
       e.target.classList.add("active");
-      currentFilter = e.target.dataset.category;
+      currentFilter = e.target.dataset.category || "";
+      console.log("🔍 Filtro admin:", currentFilter || "Todos");
       loadTemplates(currentFilter);
     });
   });
@@ -422,10 +423,13 @@ function getTemplates() {
 
 // Carregar templates
 async function loadTemplates(category = null) {
+  console.log("🔄 Admin loadTemplates chamado com categoria:", category);
+
   const container = document.getElementById("templatesList");
   container.innerHTML = '<p class="empty-message">Carregando...</p>';
 
   const templates = await Database.getTemplates(category);
+  console.log("📦 Admin templates recebidos:", templates.length);
 
   if (templates.length === 0) {
     const categoryName =
