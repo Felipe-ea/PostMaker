@@ -101,7 +101,7 @@ function createTextBoxes() {
     canvas.width * 0.3,
     canvas.height * 0.3,
     200,
-    60
+    60,
   );
   canvasWrapper.appendChild(nameBox);
 
@@ -112,7 +112,7 @@ function createTextBoxes() {
     canvas.width * 0.3,
     canvas.height * 0.5,
     250,
-    50
+    50,
   );
   canvasWrapper.appendChild(phoneBox);
 }
@@ -190,11 +190,11 @@ function drag(e) {
   // Limitar dentro do canvas
   newX = Math.max(
     0,
-    Math.min(newX, canvas.offsetWidth - draggedElement.offsetWidth)
+    Math.min(newX, canvas.offsetWidth - draggedElement.offsetWidth),
   );
   newY = Math.max(
     0,
-    Math.min(newY, canvas.offsetHeight - draggedElement.offsetHeight)
+    Math.min(newY, canvas.offsetHeight - draggedElement.offsetHeight),
   );
 
   draggedElement.style.left = newX + "px";
@@ -323,7 +323,7 @@ async function saveTemplate() {
   if (!currentImage || !nameBox || !phoneBox) {
     showNotification(
       "Configure a imagem e as posições de nome e telefone",
-      "error"
+      "error",
     );
     return;
   }
@@ -390,7 +390,7 @@ async function saveTemplate() {
   if (result.success) {
     showNotification(
       `✅ Template "${templateName}" salvo com sucesso!`,
-      "success"
+      "success",
     );
 
     // Resetar formulário
@@ -436,8 +436,8 @@ async function loadTemplates(category = null) {
       category === "royal-pago"
         ? "Royal Pago"
         : category === "capital-plus"
-        ? "Capital Plus"
-        : "";
+          ? "Capital Plus"
+          : "";
     const message = categoryName
       ? `Nenhum template da categoria ${categoryName} ainda`
       : "Nenhum template salvo ainda";
@@ -449,8 +449,8 @@ async function loadTemplates(category = null) {
     .map((template) => {
       const categoryBadge =
         template.category === "royal-pago"
-          ? '<span class="category-badge royal">🟣 Royal Pago</span>'
-          : '<span class="category-badge capital">🟢 Capital Plus</span>';
+          ? '<span class="category-badge royal">🟡 Royal Pago</span>'
+          : '<span class="category-badge capital">🔵 Capital Plus</span>';
 
       return `
       <div class="template-card">
